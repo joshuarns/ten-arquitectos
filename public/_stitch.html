@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TEN Arquitectos | Enrique Norten</title>
+<meta content="TEN Arquitectos is a transdisciplinary architectural practice founded by Enrique Norten, focusing on architecture, urbanism, and landscape." name="description"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#1c1b1b",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1a1c1c",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "on-tertiary-container": "#868382",
+                        "outline": "#747878",
+                        "on-background": "#1a1c1c",
+                        "tertiary-container": "#1c1b1a",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "deep-obsidian": "#0A0A0A",
+                        "tertiary-fixed-dim": "#cac6c4",
+                        "on-surface-variant": "#444748",
+                        "primary": "#000000",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e6e2df",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed": "#e4e2e2",
+                        "surface-container-low": "#f4f3f3",
+                        "on-secondary-fixed-variant": "#474747",
+                        "warm-gray": "#F5F5F4",
+                        "outline-variant": "#c4c7c7",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#858383",
+                        "surface-tint": "#5f5e5e",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-secondary-container": "#646464",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#e4e2e2",
+                        "surface-container": "#eeeeee",
+                        "on-primary-fixed-variant": "#474746",
+                        "tertiary": "#000000",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-container-high": "#e8e8e8",
+                        "surface": "#f9f9f9",
+                        "muted-silver": "#999999",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "secondary": "#5e5e5e",
+                        "on-primary-fixed": "#1c1b1b",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-fixed": "#1c1b1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["\"Source Serif 4\""],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "400"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.02em", "fontWeight": "300"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .snap-x { scroll-snap-type: x mandatory; }
+        .snap-center { scroll-snap-align: center; }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #000;
+        }
+        
+        .transition-drawer {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed-dim selection:text-primary font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 transition-all duration-500 text-white" id="top-app-bar">
+<button class="flex items-center gap-2 hover:opacity-70 transition-opacity duration-300" id="menu-trigger">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md tracking-tight">TEN Arquitectos</h1>
+<button class="flex items-center gap-2 hover:opacity-70 transition-opacity duration-300">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<!-- Navigation Drawer -->
+<nav class="fixed inset-0 z-[100] flex flex-col p-margin-mobile md:p-margin-desktop bg-surface transition-drawer translate-x-full" id="nav-drawer">
+<div class="flex justify-between items-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary">Index</h2>
+<button class="hover:opacity-70 transition-opacity duration-300" id="menu-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-8 flex-grow">
+<a class="group flex items-center justify-between border-b border-outline-variant py-4" href="#">
+<span class="font-headline-lg text-headline-lg-mobile text-primary group-hover:translate-x-4 transition-transform duration-300">Projects</span>
+<span class="material-symbols-outlined text-muted-silver">grid_view</span>
+</a>
+<a class="group flex items-center justify-between border-b border-outline-variant py-4" href="#">
+<span class="font-headline-lg text-headline-lg-mobile text-muted-silver hover:text-primary transition-colors duration-300">Practice</span>
+<span class="material-symbols-outlined text-muted-silver">account_balance</span>
+</a>
+<a class="group flex items-center justify-between border-b border-outline-variant py-4" href="#">
+<span class="font-headline-lg text-headline-lg-mobile text-muted-silver hover:text-primary transition-colors duration-300">Sustainability</span>
+<span class="material-symbols-outlined text-muted-silver">eco</span>
+</a>
+<a class="group flex items-center justify-between border-b border-outline-variant py-4" href="#">
+<span class="font-headline-lg text-headline-lg-mobile text-muted-silver hover:text-primary transition-colors duration-300">News</span>
+<span class="material-symbols-outlined text-muted-silver">article</span>
+</a>
+<a class="group flex items-center justify-between border-b border-outline-variant py-4" href="#">
+<span class="font-headline-lg text-headline-lg-mobile text-muted-silver hover:text-primary transition-colors duration-300">Contact</span>
+<span class="material-symbols-outlined text-muted-silver">mail</span>
+</a>
+</div>
+<div class="mt-auto py-8 text-center md:text-left">
+<p class="font-label-sm text-label-sm text-secondary">© 2024 TEN ARQUITECTOS</p>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen w-full overflow-hidden bg-black">
+<div class="absolute inset-0 flex transition-transform duration-700 ease-in-out" id="hero-slider">
+<!-- Slide 1 -->
+<div class="min-w-full h-full relative">
+<img class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="Bicentennial Museum" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVPtNegjUwPVrOtJ1eokfDFWErz-XtCfwmcfukZaM-RYYL7VpY8hPEFJl8fwZJwSJyr5kmUqI1EW5zBJq4ww7U7578Yo5X1S2Z4Kiw1otrQbaMz5Y_aGpzsn0waJSSuUEfaEclnRXFQZT-fTpfk7KY_azogfwJBzXYe7tKJBiA_hXJxlrDQNNId3JyVWbhMtPbjtDWzAvNUAmSs-Do765Wr61XTtofytA46MxK1rVs77Qk-zidcu9jcHoHXmIVVKdiMHHZ-qtir48"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-32 left-margin-mobile right-margin-mobile">
+<p class="font-label-sm text-label-sm text-white/70 mb-2 uppercase tracking-widest">Selected Works</p>
+<h2 class="font-headline-lg text-headline-lg-mobile text-white mb-4">Bicentennial Museum</h2>
+<div class="h-[1px] w-12 bg-white mb-4"></div>
+<p class="font-body-md text-white/80 max-w-sm">Mexico City, Mexico</p>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="min-w-full h-full relative">
+<img class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="Lozano House" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1rEsiWru1-vnb3i5COiHiqUgvSr7zKbjkFM4B3FJxIN0mJD2JoYLBxXig8pYTkSvCAg5EBoLBbzFH1Mi4SitqPFAtShMXOrsqYXQVr_8nc4hx11cTRSSgH5ZMXIUwIVH8ULwjb9tc1mKxzN4-MVpJqu2LegMUDmIdIxK2yje0zZDsNj0jVvtkOdwoqrDpuz6OfOXONn2ZbNz5e83kNrbEYNbHXqVuXsfJEXCBnlEeeQj7g-OR8tzwYrU_OIfp1BL5zmf2Edq2jQE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-32 left-margin-mobile right-margin-mobile">
+<p class="font-label-sm text-label-sm text-white/70 mb-2 uppercase tracking-widest">Selected Works</p>
+<h2 class="font-headline-lg text-headline-lg-mobile text-white mb-4">Lozano House</h2>
+<div class="h-[1px] w-12 bg-white mb-4"></div>
+<p class="font-body-md text-white/80 max-w-sm">Mexico City, Mexico</p>
+</div>
+</div>
+</div>
+<div class="absolute bottom-12 left-margin-mobile flex gap-4">
+<button class="w-12 h-12 flex items-center justify-center border border-white/30 text-white hover:bg-white hover:text-black transition-colors" id="prev-slide">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center border border-white/30 text-white hover:bg-white hover:text-black transition-colors" id="next-slide">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- 1. Horizontal Project Timeline -->
+<section class="py-24 bg-surface overflow-hidden">
+<div class="max-w-max-width mx-auto px-margin-mobile mb-12">
+<h3 class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em]">Project Timeline</h3>
+</div>
+<div class="flex overflow-x-auto no-scrollbar snap-x gap-8 px-margin-mobile pb-8">
+<!-- Timeline Item 1 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-6 bg-surface-container">
+<img alt="Guggenheim Helsinki" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeAWtTS_mihCVOkLJNX-kmjfDQWKzgTbQTO0KPX91troETL1dkWUAwXpXP0P0-pc3AQOzARVSIY2zefeqPHNjxpIU0hLr5jdK1t7D82m5X1jkCSgGygfEsyHwZcGG0DUAZzErcJsNzt03G2HbgY4xZmloaw5sCUPLDkLBb1n5jTpcrb0haT5FtOXIAZbqKhR4CsSJAjn0c4_EXpa7p1KJk7fi6rMPfo3nQVtiS6LxGpu9iS3dkMydqHKsGStoSKDr2SDgID3fdpEk"/>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="font-label-sm text-label-sm text-muted-silver">2014</span>
+<h4 class="font-headline-md text-[20px] text-primary">Guggenheim Helsinki</h4>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-6 bg-surface-container">
+<img alt="Bicentennial Museum" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVPtNegjUwPVrOtJ1eokfDFWErz-XtCfwmcfukZaM-RYYL7VpY8hPEFJl8fwZJwSJyr5kmUqI1EW5zBJq4ww7U7578Yo5X1S2Z4Kiw1otrQbaMz5Y_aGpzsn0waJSSuUEfaEclnRXFQZT-fTpfk7KY_azogfwJBzXYe7tKJBiA_hXJxlrDQNNId3JyVWbhMtPbjtDWzAvNUAmSs-Do765Wr61XTtofytA46MxK1rVs77Qk-zidcu9jcHoHXmIVVKdiMHHZ-qtir48"/>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="font-label-sm text-label-sm text-muted-silver">2010</span>
+<h4 class="font-headline-md text-[20px] text-primary">Bicentennial Museum</h4>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-6 bg-surface-container">
+<img alt="Habita Hotel" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFcK0Uk-cK512PpfQDmv8ynKvTXVwTiIFLVL5WruXS5EIfGJKL0RJm2TJtqZGJXm1qtvs0W-Ai4qWdB207AKjUYAYKopDSaRfuuozvld56d4zsCOGBvcPNTrFhAxWk36aD6fbvQgcdOqKhy2GwOKen3ScL46HOpI7nSxPZwMB7WmpkEQCprm-EH229teQVy0cbSFRSoiX2_pj4oGXj5-y-yUG4LF-VzeItg8RlxgNvC4ujRfD9kFwthRXbzRs-Qo9fN0gT_EMJRR8"/>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="font-label-sm text-label-sm text-muted-silver">2000</span>
+<h4 class="font-headline-md text-[20px] text-primary">Habita Hotel</h4>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-6 bg-surface-container">
+<img alt="Avenida Chapultepec" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1iQNUnZepBmXr_kuY1wDj-qeFJiMJ5jZ1PyOGwpJ7lnZQpS40jyBY-zgW81McHa2l02fqFkYErmn8iZarB_ZDd3i8bpJqqDFJ-ujadFDsd448w94_aHH2E6HtVJDGL4pFd9tYJ31DiplDSfstJnaHLxz2mLJ0t42UdIxDnv7uIBadnnJp8mMlmExZDA7vrC5cJPaemyLYUoGGgXts2n5U4m3gNdJdoKj2xe3zMtcgIEVK1QCdcr9ZLerVaKMRhn8pl_PFcAXqMS4"/>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="font-label-sm text-label-sm text-muted-silver">2015</span>
+<h4 class="font-headline-md text-[20px] text-primary">Avenida Chapultepec</h4>
+</div>
+</div>
+<!-- Timeline Item 5 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-6 bg-surface-container">
+<img alt="NASA Glenn Center" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkuMy3fTFT6IUC1_OYuiEWSvc-6Y6Xy0wCgZwZrl_sxQRCKhfSPNcoxDdsIfX1zNB7_Tjgsu5CwlwAGxOmuEd_mGvcMBiXpezNGAbnqtzwcvnxZmkd36s9RdCfVvqHHBrOQnPjC299rPYiVAI1WBjCgdvG_1lTZ0yq-RhBSVp_SmTEhAD_6n7ErhrGqQM0Q0uuGHrs0DGf7IFpFwhNM6BX197cnKOoNHEzSXeOj2z-g7zJUYDyrKuP_gr3ks9wHOG3zuoBNjouGkg"/>
+</div>
+<div class="flex items-baseline gap-4">
+<span class="font-label-sm text-label-sm text-muted-silver">2018</span>
+<h4 class="font-headline-md text-[20px] text-primary">NASA Glenn Center</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- Statement Section -->
+<section class="py-32 px-margin-mobile max-w-max-width mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-8 md:col-start-3">
+<span class="font-label-sm text-label-sm text-secondary block mb-8 uppercase tracking-widest">Enrique Norten</span>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface mb-12">
+                        "Architecture is not just building; it is a cultural act that articulates space and time."
+                    </h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                        Founded in 1986, TEN Arquitectos operates between Mexico City, New York, and Miami. We engage in a diverse range of projects—from single-family houses to large-scale infrastructure and urban master plans.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Disciplines Section -->
+<section class="py-24 bg-surface px-margin-mobile border-y border-outline-variant/30">
+<div class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-3">
+<h3 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest pt-4">Disciplines</h3>
+</div>
+<div class="md:col-span-9">
+<div class="flex flex-col">
+<a class="group flex items-center justify-between py-10 border-b border-outline-variant hover:bg-surface-container-low transition-colors px-4 -mx-4" href="#">
+<span class="font-display-lg text-[40px] md:text-[64px] text-primary group-hover:translate-x-4 transition-transform duration-500">Architecture</span>
+<span class="material-symbols-outlined text-muted-silver opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</a>
+<a class="group flex items-center justify-between py-10 border-b border-outline-variant hover:bg-surface-container-low transition-colors px-4 -mx-4" href="#">
+<span class="font-display-lg text-[40px] md:text-[64px] text-primary group-hover:translate-x-4 transition-transform duration-500">Urbanism</span>
+<span class="material-symbols-outlined text-muted-silver opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</a>
+<a class="group flex items-center justify-between py-10 border-b border-outline-variant hover:bg-surface-container-low transition-colors px-4 -mx-4" href="#">
+<span class="font-display-lg text-[40px] md:text-[64px] text-primary group-hover:translate-x-4 transition-transform duration-500">Exhibitions &amp; Design</span>
+<span class="material-symbols-outlined text-muted-silver opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects Section -->
+<section class="py-32 px-margin-mobile">
+<div class="max-w-max-width mx-auto">
+<div class="mb-16 flex justify-between items-end">
+<h3 class="font-headline-lg text-headline-lg-mobile text-primary">Featured Projects</h3>
+<a class="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" href="#">View Archive</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-16">
+<!-- Project 1 -->
+<div class="group">
+<div class="overflow-hidden mb-6 aspect-[4/3] bg-surface-container">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Guggenheim Helsinki" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeAWtTS_mihCVOkLJNX-kmjfDQWKzgTbQTO0KPX91troETL1dkWUAwXpXP0P0-pc3AQOzARVSIY2zefeqPHNjxpIU0hLr5jdK1t7D82m5X1jkCSgGygfEsyHwZcGG0DUAZzErcJsNzt03G2HbgY4xZmloaw5sCUPLDkLBb1n5jTpcrb0haT5FtOXIAZbqKhR4CsSJAjn0c4_EXpa7p1KJk7fi6rMPfo3nQVtiS6LxGpu9iS3dkMydqHKsGStoSKDr2SDgID3fdpEk"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-widest">Museum</p>
+<h4 class="font-headline-md text-body-lg font-bold text-primary">Guggenheim Helsinki</h4>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="group">
+<div class="overflow-hidden mb-6 aspect-[4/3] bg-surface-container">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Avenida Chapultepec" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1iQNUnZepBmXr_kuY1wDj-qeFJiMJ5jZ1PyOGwpJ7lnZQpS40jyBY-zgW81McHa2l02fqFkYErmn8iZarB_ZDd3i8bpJqqDFJ-ujadFDsd448w94_aHH2E6HtVJDGL4pFd9tYJ31DiplDSfstJnaHLxz2mLJ0t42UdIxDnv7uIBadnnJp8mMlmExZDA7vrC5cJPaemyLYUoGGgXts2n5U4m3gNdJdoKj2xe3zMtcgIEVK1QCdcr9ZLerVaKMRhn8pl_PFcAXqMS4"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-sm text-label-sm text-secondary mb-1 uppercase tracking-widest">Urban Infrastructure</p>
+<h4 class="font-headline-md text-body-lg font-bold text-primary">Avenida Chapultepec</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Studio & Leadership Intro -->
+<section class="py-40 bg-surface px-margin-mobile">
+<div class="max-w-max-width mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<!-- Left Column: Leadership Portrait -->
+<div class="relative order-2 lg:order-1">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-high">
+<!-- Placeholder for Enrique Norten portrait -->
+<img alt="Enrique Norten" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1rEsiWru1-vnb3i5COiHiqUgvSr7zKbjkFM4B3FJxIN0mJD2JoYLBxXig8pYTkSvCAg5EBoLBbzFH1Mi4SitqPFAtShMXOrsqYXQVr_8nc4hx11cTRSSgH5ZMXIUwIVH8ULwjb9tc1mKxzN4-MVpJqu2LegMUDmIdIxK2yje0zZDsNj0jVvtkOdwoqrDpuz6OfOXONn2ZbNz5e83kNrbEYNbHXqVuXsfJEXCBnlEeeQj7g-OR8tzwYrU_OIfp1BL5zmf2Edq2jQE"/>
+</div>
+<div class="mt-8 lg:absolute lg:bottom-0 lg:-right-12 lg:bg-background lg:p-8 lg:shadow-sm max-w-sm">
+<h4 class="font-headline-md text-primary mb-2">Enrique Norten</h4>
+<p class="font-label-sm text-secondary uppercase tracking-widest mb-4">Founder &amp; Principal</p>
+<p class="font-body-md text-secondary italic">"Our work is a continuous investigation of the intersection between human culture and the physical environment."</p>
+</div>
+</div>
+<!-- Right Column: Philosophy & Studio -->
+<div class="flex flex-col order-1 lg:order-2">
+<span class="font-label-sm text-label-sm text-secondary block mb-6 uppercase tracking-[0.3em]">The Practice</span>
+<h2 class="font-headline-lg text-headline-lg-mobile text-primary mb-12 leading-tight">
+                            Architecture as a cultural act that articulates space and time.
+                        </h2>
+<div class="aspect-[16/9] overflow-hidden mb-12 bg-surface-container">
+<!-- Atmospheric studio shot -->
+<img alt="Studio Atmosphere" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkuMy3fTFT6IUC1_OYuiEWSvc-6Y6Xy0wCgZwZrl_sxQRCKhfSPNcoxDdsIfX1zNB7_Tjgsu5CwlwAGxOmuEd_mGvcMBiXpezNGAbnqtzwcvnxZmkd36s9RdCfVvqHHBrOQnPjC299rPYiVAI1WBjCgdvG_1lTZ0yq-RhBSVp_SmTEhAD_6n7ErhrGqQM0Q0uuGHrs0DGf7IFpFwhNM6BX197cnKOoNHEzSXeOj2z-g7zJUYDyrKuP_gr3ks9wHOG3zuoBNjouGkg"/>
+</div>
+<p class="font-body-lg text-secondary mb-8">
+                            With studios in Mexico City, New York, and Miami, TEN Arquitectos maintains a transdisciplinary approach that transcends scale and geography. We believe in the power of architecture to transform public life and foster sustainable urban evolution.
+                        </p>
+<a class="inline-flex items-center gap-4 font-label-sm text-label-sm text-primary uppercase tracking-widest hover:gap-6 transition-all duration-300" href="#">
+                            Read Our Story <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- News Section -->
+<section class="py-32 px-margin-mobile bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="max-w-max-width mx-auto">
+<div class="flex justify-between items-end mb-16">
+<h3 class="font-headline-lg text-headline-lg-mobile text-primary">News</h3>
+<a class="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" href="#">View All News</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<article class="flex flex-col">
+<time class="font-label-sm text-label-sm text-secondary mb-4 uppercase tracking-widest">18 JUNE 2026</time>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 leading-tight">Where Earth meets the stars: Design for astrotourism visitor centre unveiled</h4>
+<p class="font-body-md text-secondary mb-6 line-clamp-3">TEN Arquitectos has unveiled the design for a new astrotourism visitor centre, set to be built in the remote deserts...</p>
+<a class="mt-auto inline-flex items-center gap-2 font-label-sm text-label-sm text-primary hover:gap-4 transition-all duration-300" href="#">
+                            READ MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</article>
+<article class="flex flex-col">
+<time class="font-label-sm text-label-sm text-secondary mb-4 uppercase tracking-widest">15 JUNE 2026</time>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 leading-tight">Urban transformation: New cultural district welcomes the public</h4>
+<p class="font-body-md text-secondary mb-6 line-clamp-3">The first phase of the masterplan transformation opens today, featuring innovative public spaces and a recast of historical structures...</p>
+<a class="mt-auto inline-flex items-center gap-2 font-label-sm text-label-sm text-primary hover:gap-4 transition-all duration-300" href="#">
+                            READ MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</article>
+<article class="flex flex-col">
+<time class="font-label-sm text-label-sm text-secondary mb-4 uppercase tracking-widest">22 APRIL 2026</time>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 leading-tight">Bringing new life to Smithfield’s historic Annexe market buildings</h4>
+<p class="font-body-md text-secondary mb-6 line-clamp-3">Exciting news: TEN Arquitectos is designing the regeneration of the historic market buildings, preserving heritage while adding modern utility...</p>
+<a class="mt-auto inline-flex items-center gap-2 font-label-sm text-label-sm text-primary hover:gap-4 transition-all duration-300" href="#">
+                            READ MORE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</article>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Split -->
+<section class="border-t border-outline-variant/30 py-32 px-margin-mobile">
+<div class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
+<div>
+<h3 class="font-headline-md text-headline-md mb-8">Work with us</h3>
+<p class="font-body-md text-secondary mb-12">We are always looking for exceptional talent to join our studios in Mexico City, New York, and Miami.</p>
+<a class="inline-flex items-center gap-2 font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" href="#">
+                        Current Openings <span class="material-symbols-outlined text-sm">trending_flat</span>
+</a>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md mb-8">Stay updated</h3>
+<form class="flex flex-col gap-6">
+<div class="relative">
+<label class="font-label-sm text-label-sm text-secondary block mb-2 uppercase tracking-widest">Email Address</label>
+<input class="w-full bg-transparent border-b border-primary py-4 px-0 focus:outline-none focus:border-muted-silver transition-colors font-body-md" placeholder="hello@architecture.com" type="email"/>
+</div>
+<button class="self-start px-8 py-4 border border-primary text-primary font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary hover:text-white transition-colors duration-300" type="submit">
+                            Subscribe
+                        </button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background border-t border-outline-variant py-24 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight mb-8">TEN Arquitectos</h2>
+<div class="flex flex-col gap-4">
+<p class="font-body-md text-secondary">MEX — NY — MIA</p>
+<p class="font-body-md text-secondary">General Inquiries: info@ten-arquitectos.com</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-16">
+<div class="flex flex-col gap-4">
+<p class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Follow</p>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Vimeo</a>
+</div>
+<div class="flex flex-col gap-4">
+<p class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-widest">Legal</p>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Careers</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-secondary hover:text-primary transition-colors" href="#">Cookies</a>
+</div>
+</div>
+</div>
+<div class="max-w-max-width mx-auto mt-24 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-outline-variant/30 pt-8">
+<p class="font-label-sm text-label-sm text-muted-silver">© 2024 TEN Arquitectos. All rights reserved.</p>
+<div class="flex gap-8">
+<span class="font-label-sm text-label-sm text-muted-silver">SITE BY TEN DIGITAL</span>
+</div>
+</div>
+</footer>
+<script>
+        // Hero Slider Logic
+        const slider = document.getElementById('hero-slider');
+        const nextBtn = document.getElementById('next-slide');
+        const prevBtn = document.getElementById('prev-slide');
+        let currentSlide = 0;
+        const totalSlides = slider.children.length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        // Sticky Header Transition
+        const header = document.getElementById('top-app-bar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+                header.classList.remove('text-white');
+                header.classList.add('text-primary');
+            } else {
+                header.classList.remove('scrolled');
+                header.classList.add('text-white');
+                header.classList.remove('text-primary');
+            }
+        });
+
+        // Navigation Drawer Logic
+        const menuTrigger = document.getElementById('menu-trigger');
+        const menuClose = document.getElementById('menu-close');
+        const navDrawer = document.getElementById('nav-drawer');
+
+        menuTrigger.addEventListener('click', () => {
+            navDrawer.classList.remove('translate-x-full');
+        });
+
+        menuClose.addEventListener('click', () => {
+            navDrawer.classList.add('translate-x-full');
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-8');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
