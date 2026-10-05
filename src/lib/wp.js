@@ -70,7 +70,14 @@ function categoryId(slug) {
   if (!categoryIds.has(slug)) {
     categoryIds.set(
       slug,
-      request(`/wp/v2/categories?slug=${encodeURIComponent(slug)}`).then(({ data }) => data[0]?.id ?? null),
+      request(`/wp/v2/categories?slug=${encodeURIComponent(slug)}`)
+        .then(({ data }) => data[0]?.id ?? null)
+        // A failed lookup must not take down projects/news: treat as "no category".
+        .catch((error) => {
+          console.error(error)
+          categoryIds.delete(slug)
+          return null
+        }),
     )
   }
   return categoryIds.get(slug)

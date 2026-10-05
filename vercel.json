@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/wp-json/:path*", "destination": "http://cms.alejandroa184.sg-host.com/wp-json/:path*" },
+    { "source": "/wp-content/:path*", "destination": "http://cms.alejandroa184.sg-host.com/wp-content/:path*" },
+    { "source": "/((?!assets/|images/).*)", "destination": "/index.html" }
+  ]
+}

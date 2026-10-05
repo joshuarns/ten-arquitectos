@@ -50,17 +50,20 @@ How a post maps to the page (`src/lib/project.js`):
 - **No images in the content yet** → the text is split into the reference's
   rhythm with grey boxes where the images go.
 
-## Production
+## Production (Vercel)
 
-`npm run build` generates `dist/`. Before publishing:
+`vercel.json` does in production what the Vite proxy does in development:
+`/wp-json/*` and `/wp-content/*` are forwarded to the CMS, and every other
+route serves `index.html` so `/proyectos/...` and `/news/...` work when
+opened directly.
 
-1. Install a valid SSL certificate on `cms.alejandroa184.sg-host.com`
-   (SiteGround → Security → SSL Manager). Today it serves SiteGround's
-   self-signed certificate and browsers will block requests.
-2. Set `VITE_WP_API_URL=https://cms.alejandroa184.sg-host.com/wp-json` at
-   build time.
-3. Configure the server to serve `index.html` on every route (SPA
-   fallback) so `/news/...` works.
+1. The rewrites reach the CMS over **http**: SiteGround cannot issue SSL for
+   the temporary `cms.alejandroa184.sg-host.com` domain. Visitors still use
+   https (to Vercel); only the Vercel → CMS hop is unencrypted, which is fine
+   for public content. Once the CMS has a real domain with SSL, switch the
+   destinations in `vercel.json` to `https://`.
+2. In Vercel, leave `VITE_WP_API_URL` **unset** so the app uses the
+   `/wp-json` rewrite. If the CMS domain changes, update `vercel.json`.
 
 `public/_stitch.html` is the original design, kept for visual comparison;
 delete it before publishing.
