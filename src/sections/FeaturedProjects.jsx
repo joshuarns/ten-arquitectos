@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import { featuredProjects } from '../data/content'
 
@@ -7,7 +8,7 @@ export default function FeaturedProjects() {
       <Reveal className="max-w-max-width mx-auto">
         <div className="mb-16 flex justify-between items-end">
           <h3 className="font-headline-lg text-headline-lg-mobile text-primary">Featured Projects</h3>
-          <a className="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" href="#">View Archive</a>
+          <Link className="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" to="/proyectos">View Archive</Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-16">
           {featuredProjects.map((project) => (

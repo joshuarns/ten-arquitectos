@@ -26,6 +26,30 @@ In dev and `npm run preview`, `/wp-json` is proxied to `WP_PROXY_TARGET`
 - Hero, timeline, featured projects and the rest of the static content live
   in `src/data/content.js`.
 
+## Projects (`/proyectos`, `/proyectos/:slug`)
+
+Layout replicated from jsa.com.mx/proyectos and
+jsa.com.mx/proyectos/conjunto-juan-de-la-barrera. Projects = every post that
+is not News (or posts in `VITE_WP_PROJECTS_CATEGORY`).
+
+How a post maps to the page (`src/lib/project.js`):
+
+- **Title** → project name (a trailing " — TEN Arquitectos" is dropped).
+- **Featured image** → hero (720px tall) and the thumbnail in the grid.
+- **First paragraph in italics/bold** → project data, split on " — ":
+  location, `Program: …` → Tipología, `… m²` → Área.
+  E.g. `Morelia, Michoacán, Mexico — Program: Private Residence — 4,000 m²`.
+- **ACF fields** (optional, with "Show in REST API" on) override that data:
+  `ubicacion`, `tipologia`, `fecha`, `area`, `fotografias`, `creditos`.
+  The year in `fecha` sorts the chronological list; without it the post's
+  publish year is used.
+- **The 1–2 following paragraphs** → text next to the accordion.
+- **The rest** → text and images in content order. Each group of consecutive
+  images becomes a gallery (5 layouts measured from the reference, used in
+  order); a single image on its own becomes a full-width image.
+- **No images in the content yet** → the text is split into the reference's
+  rhythm with grey boxes where the images go.
+
 ## Production
 
 `npm run build` generates `dist/`. Before publishing:

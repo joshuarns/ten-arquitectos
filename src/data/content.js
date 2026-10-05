@@ -22,7 +22,7 @@ export const featuredProjects = [
 ]
 
 export const navItems = [
-  { label: 'Projects', icon: 'grid_view', to: '/' },
+  { label: 'Projects', icon: 'grid_view', to: '/proyectos' },
   { label: 'Practice', icon: 'account_balance', to: '/' },
   { label: 'Sustainability', icon: 'eco', to: '/' },
   { label: 'News', icon: 'article', to: '/news' },
