@@ -29,20 +29,23 @@ export default function Hero() {
         id="hero-slider"
         style={current === null ? undefined : { transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((slide) => (
-          <div key={slide.title} className="min-w-full h-full relative">
-            <img className="absolute inset-0 w-full h-full object-cover opacity-80" alt={slide.title} src={slide.image} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="absolute bottom-32 left-margin-mobile right-margin-mobile">
-              <p className="font-label-sm text-label-sm text-white/70 mb-2 uppercase tracking-widest">Selected Works</p>
-              <h2 className="font-headline-lg text-headline-lg-mobile text-white mb-4">
-                {slide.to ? <Link className="hover:opacity-70 transition-opacity duration-300" to={slide.to}>{slide.title}</Link> : slide.title}
-              </h2>
-              <div className="h-[1px] w-12 bg-white mb-4"></div>
-              <p className="font-body-md text-white/80 max-w-sm">{slide.location}</p>
-            </div>
-          </div>
-        ))}
+        {slides.map((slide) => {
+          const Slide = slide.to ? Link : 'div'
+          return (
+            <Slide key={slide.title} to={slide.to} className="group block min-w-full h-full relative">
+              <img className="absolute inset-0 w-full h-full object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-90" alt={slide.title} src={slide.image} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-32 left-margin-mobile right-margin-mobile">
+                <p className="font-label-sm text-label-sm text-white/70 mb-2 uppercase tracking-widest">Selected Works</p>
+                <h2 className="font-headline-lg text-headline-lg-mobile text-white mb-4 transition-opacity duration-300 group-hover:opacity-70">
+                  {slide.title}
+                </h2>
+                <div className="h-[1px] w-12 bg-white mb-4"></div>
+                <p className="font-body-md text-white/80 max-w-sm">{slide.location}</p>
+              </div>
+            </Slide>
+          )
+        })}
       </Reveal>
       <Reveal className="absolute bottom-12 left-margin-mobile flex gap-4">
         <button className="w-12 h-12 flex items-center justify-center border border-white/30 text-white hover:bg-white hover:text-black transition-colors" onClick={() => go(-1)} aria-label="Previous slide">
