@@ -1,11 +1,25 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icon'
 import { heroSlides } from '../data/content'
+import useProjects from '../hooks/useProjects'
+
+// Slides = WordPress projects with a featured image. The design's static
+// slides are only used if there are none (or WordPress is unreachable).
+function useSlides() {
+  const { projects, loading } = useProjects()
+  if (loading) return []
+  const fromProjects = projects
+    .filter((p) => p.image)
+    .map((p) => ({ title: p.title, location: p.location, image: p.image, to: `/proyectos/${p.slug}` }))
+  return fromProjects.length ? fromProjects : heroSlides
+}
 
 export default function Hero() {
+  const slides = useSlides()
   const [current, setCurrent] = useState(null)
-  const total = heroSlides.length
+  const total = slides.length || 1
   const go = (step) => setCurrent((c) => ((c ?? 0) + step + total) % total)
 
   return (
@@ -15,13 +29,15 @@ export default function Hero() {
         id="hero-slider"
         style={current === null ? undefined : { transform: `translateX(-${current * 100}%)` }}
       >
-        {heroSlides.map((slide) => (
+        {slides.map((slide) => (
           <div key={slide.title} className="min-w-full h-full relative">
             <img className="absolute inset-0 w-full h-full object-cover opacity-80" alt={slide.title} src={slide.image} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             <div className="absolute bottom-32 left-margin-mobile right-margin-mobile">
               <p className="font-label-sm text-label-sm text-white/70 mb-2 uppercase tracking-widest">Selected Works</p>
-              <h2 className="font-headline-lg text-headline-lg-mobile text-white mb-4">{slide.title}</h2>
+              <h2 className="font-headline-lg text-headline-lg-mobile text-white mb-4">
+                {slide.to ? <Link className="hover:opacity-70 transition-opacity duration-300" to={slide.to}>{slide.title}</Link> : slide.title}
+              </h2>
               <div className="h-[1px] w-12 bg-white mb-4"></div>
               <p className="font-body-md text-white/80 max-w-sm">{slide.location}</p>
             </div>
