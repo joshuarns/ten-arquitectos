@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import ProjectGrid from '../components/project/ProjectGrid'
+import ProjectList from '../components/project/ProjectList'
 import useProjects from '../hooks/useProjects'
 
 export default function FeaturedProjects() {
@@ -14,6 +15,11 @@ export default function FeaturedProjects() {
           <Link className="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" to="/proyectos">View Archive</Link>
         </div>
         <ProjectGrid projects={projects} loading={loading} />
+        {projects.length > 0 && (
+          <div className="mt-[96px]">
+            <ProjectList projects={projects} />
+          </div>
+        )}
       </Reveal>
     </section>
   )
