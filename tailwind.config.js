@@ -73,14 +73,18 @@ export default {
         "gutter": "24px",
         "max-width": "1440px"
       },
+      // All text uses Arial.
       "fontFamily": {
-        "headline-lg-mobile": ["\"Source Serif 4\""],
-        "body-lg": ["Hanken Grotesk"],
-        "body-md": ["Hanken Grotesk"],
-        "headline-md": ["Hanken Grotesk"],
-        "label-sm": ["JetBrains Mono"],
-        "display-lg": ["\"Source Serif 4\""],
-        "headline-lg": ["\"Source Serif 4\""]
+        "sans": ["Arial", "Helvetica", "sans-serif"],
+        "serif": ["Arial", "Helvetica", "sans-serif"],
+        "mono": ["Arial", "Helvetica", "sans-serif"],
+        "headline-lg-mobile": ["Arial", "Helvetica", "sans-serif"],
+        "body-lg": ["Arial", "Helvetica", "sans-serif"],
+        "body-md": ["Arial", "Helvetica", "sans-serif"],
+        "headline-md": ["Arial", "Helvetica", "sans-serif"],
+        "label-sm": ["Arial", "Helvetica", "sans-serif"],
+        "display-lg": ["Arial", "Helvetica", "sans-serif"],
+        "headline-lg": ["Arial", "Helvetica", "sans-serif"]
       },
       "fontSize": {
         "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "400"}],
