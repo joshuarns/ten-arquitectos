@@ -4,6 +4,9 @@ import ProjectList from '../components/project/ProjectList'
 import Timeline from '../sections/Timeline'
 import useProjects from '../hooks/useProjects'
 
+// The chronological list is hidden for now; the timeline takes its place.
+const SHOW_PROJECT_LIST = false
+
 export default function ProjectsIndex() {
   const { projects, loading } = useProjects()
 
@@ -19,7 +22,7 @@ export default function ProjectsIndex() {
       </section>
 
       {/* Chronological list */}
-      {projects.length > 0 && (
+      {SHOW_PROJECT_LIST && projects.length > 0 && (
         <section className="px-[6vw] md:px-[5vw] pt-[48px] pb-[64px] md:pb-[133px]">
           <ProjectList projects={projects} />
         </section>

@@ -4,6 +4,9 @@ import ProjectGrid from '../components/project/ProjectGrid'
 import ProjectList from '../components/project/ProjectList'
 import useProjects from '../hooks/useProjects'
 
+// The chronological list is hidden for now; the timeline takes its place.
+const SHOW_PROJECT_LIST = false
+
 export default function FeaturedProjects() {
   const { projects, loading } = useProjects()
 
@@ -15,7 +18,7 @@ export default function FeaturedProjects() {
           <Link className="font-label-sm text-label-sm text-primary hover:underline uppercase tracking-widest" to="/proyectos">View Archive</Link>
         </div>
         <ProjectGrid projects={projects} loading={loading} />
-        {projects.length > 0 && (
+        {SHOW_PROJECT_LIST && projects.length > 0 && (
           <div className="mt-[96px]">
             <ProjectList projects={projects} />
           </div>
