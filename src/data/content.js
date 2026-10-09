@@ -6,14 +6,6 @@ export const heroSlides = [
   { title: 'Lozano House', location: 'Mexico City, Mexico', image: '/images/lozano-house.png' },
 ]
 
-export const timeline = [
-  { year: '2014', title: 'Guggenheim Helsinki', image: '/images/guggenheim-helsinki.png' },
-  { year: '2010', title: 'Bicentennial Museum', image: '/images/bicentennial-museum.png' },
-  { year: '2000', title: 'Habita Hotel', image: '/images/habita-hotel.png' },
-  { year: '2015', title: 'Avenida Chapultepec', image: '/images/avenida-chapultepec.png' },
-  { year: '2018', title: 'NASA Glenn Center', image: '/images/nasa-glenn-center.png' },
-]
-
 export const disciplines = ['Architecture', 'Urbanism', 'Exhibitions & Design']
 
 export const featuredProjects = [

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import ProjectGrid from '../components/project/ProjectGrid'
 import ProjectList from '../components/project/ProjectList'
+import Timeline from '../sections/Timeline'
 import useProjects from '../hooks/useProjects'
 
 export default function ProjectsIndex() {
@@ -23,6 +24,8 @@ export default function ProjectsIndex() {
           <ProjectList projects={projects} />
         </section>
       )}
+
+      <Timeline />
     </div>
   )
 }
