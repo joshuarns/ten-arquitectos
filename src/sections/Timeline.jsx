@@ -56,7 +56,7 @@ function Segment({ start, open, isLast }) {
 }
 
 export default function Timeline() {
-  const [open, setOpen] = useState(() => new Set())
+  const [open, setOpen] = useState(() => new Set([0]))
   const id = useId()
 
   const toggle = (i) =>
@@ -68,18 +68,18 @@ export default function Timeline() {
     })
 
   return (
-    <section className="bg-white text-black px-[6vw] md:px-[5vw] py-[64px] md:py-[120px]">
-      <Reveal className="flex flex-col items-center">
-        <div className="flex w-full md:w-auto md:gap-[46px]">
+    <section className="bg-white text-black px-[6vw] md:px-[5vw] py-[64px] md:py-[120px] md:min-h-screen flex flex-col justify-center">
+      <Reveal className="flex flex-col w-full max-w-[1280px] mx-auto">
+        <div className="flex w-full md:gap-[46px]">
           <div className="w-[300px] shrink-0 hidden md:block" />
-          <h3 className="jsa-text font-bold mb-[16px] w-full md:w-[560px]">{timelineTitle}</h3>
+          <h3 className="jsa-text font-bold mb-[16px] w-full md:flex-1">{timelineTitle}</h3>
         </div>
         {timelineDecades.map((decade, i) => {
           const isOpen = open.has(i)
           return (
-            <div key={decade.title} className="flex w-full md:w-auto md:gap-[46px]">
+            <div key={decade.title} className="flex w-full md:gap-[46px]">
               <Segment start={timelineRange.from + i * 10} open={isOpen} />
-              <article className="jsa-text w-full md:w-[560px]">
+              <article className="jsa-text w-full md:flex-1">
                 <h4>
                   <button
                     className="w-full flex items-center justify-between text-left font-bold"
@@ -108,9 +108,9 @@ export default function Timeline() {
           )
         })}
         {/* Closing arrow for the decade still being written. */}
-        <div className="hidden md:flex md:gap-[46px]" aria-hidden="true">
+        <div className="hidden md:flex w-full md:gap-[46px]" aria-hidden="true">
           <Segment start={timelineRange.to} isLast />
-          <div className="w-[560px]" style={{ height: ROW }} />
+          <div className="flex-1" style={{ height: ROW }} />
         </div>
       </Reveal>
     </section>
