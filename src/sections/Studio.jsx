@@ -9,7 +9,7 @@ export default function Studio() {
           {/* Left Column: Leadership Portrait */}
           <div className="relative order-2 lg:order-1">
             <div className="aspect-[3/4] overflow-hidden bg-surface-container-high">
-              <img alt="Enrique Norten" className="w-full h-full object-cover" src="/images/lozano-house.png" />
+              <img alt="Enrique Norten" className="w-full h-full object-cover" src="/images/enrique-norten.jpg" />
             </div>
             <div className="mt-8 lg:absolute lg:bottom-0 lg:-right-12 lg:bg-background lg:p-8 lg:shadow-sm max-w-sm">
               <h4 className="font-headline-md text-primary mb-2">Enrique Norten</h4>
