@@ -8,6 +8,7 @@ import NewsIndex from './pages/NewsIndex'
 import NewsPost from './pages/NewsPost'
 import ProjectsIndex from './pages/ProjectsIndex'
 import ProjectPage from './pages/ProjectPage'
+import EnriqueNorten from './pages/EnriqueNorten'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="news/:slug" element={<NewsPost />} />
           <Route path="proyectos" element={<ProjectsIndex />} />
           <Route path="proyectos/:slug" element={<ProjectPage />} />
+          <Route path="enrique-norten" element={<EnriqueNorten />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -16,6 +16,7 @@ export const featuredProjects = [
 export const navItems = [
   { label: 'Projects', icon: 'grid_view', to: '/proyectos' },
   { label: 'Practice', icon: 'account_balance', to: '/' },
+  { label: 'Enrique Norten', icon: 'person', to: '/enrique-norten' },
   { label: 'Sustainability', icon: 'eco', to: '/' },
   { label: 'News', icon: 'article', to: '/news' },
   { label: 'Contact', icon: 'mail', to: '/' },
