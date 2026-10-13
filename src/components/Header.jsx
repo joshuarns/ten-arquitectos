@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Icon from './Icon'
+import Logo from './Logo'
 import { navItems } from '../data/content'
 
 export default function Header() {
@@ -32,8 +33,12 @@ export default function Header() {
         <button className="flex items-center gap-2 hover:opacity-70 transition-opacity duration-300" onClick={() => setOpen(true)} aria-label="Open menu">
           <Icon name="menu" />
         </button>
-        <h1 className="font-headline-md text-headline-md tracking-tight">
-          <Link to="/">TEN Arquitectos</Link>
+        <h1 className="h-8 flex items-center">
+          <Link to="/" className="relative block" aria-label="TEN Arquitectos — Inicio">
+            {/* White over the home hero, purple (primary) once the bar is solid. */}
+            <Logo variant="purple" className={`h-5 md:h-6 transition-opacity duration-500 ${solid ? 'opacity-100' : 'opacity-0'}`} />
+            <Logo variant="white" className={`h-5 md:h-6 absolute inset-0 transition-opacity duration-500 ${solid ? 'opacity-0' : 'opacity-100'}`} />
+          </Link>
         </h1>
         <button className="flex items-center gap-2 hover:opacity-70 transition-opacity duration-300" aria-label="Search">
           <Icon name="search" />

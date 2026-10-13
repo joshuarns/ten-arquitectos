@@ -1,9 +1,13 @@
+import Logo from './Logo'
+
 export default function Footer() {
   return (
     <footer className="bg-background border-t border-outline-variant py-24 px-margin-mobile md:px-margin-desktop">
       <div className="max-w-max-width mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
         <div>
-          <h2 className="font-headline-md text-headline-md text-primary tracking-tight mb-8">TEN Arquitectos</h2>
+          <h2 className="mb-8">
+            <Logo variant="purple" className="h-6 md:h-7" />
+          </h2>
           <div className="flex flex-col gap-4">
             <p className="font-body-md text-secondary">MEX — NY — MIA</p>
             <p className="font-body-md text-secondary">General Inquiries: info@ten-arquitectos.com</p>
