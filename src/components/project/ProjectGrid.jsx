@@ -10,7 +10,7 @@ export default function ProjectGrid({ projects, loading }) {
             image={p.image && { src: p.image, alt: p.imageAlt || p.title }}
             className="w-full aspect-[309/232] [&>img]:transition-opacity [&>img]:duration-300 group-hover:[&>img]:opacity-80"
           />
-          <h3 className="jsa-text font-semibold uppercase leading-[20px] mt-[14px]">{p.title}</h3>
+          <h3 className="jsa-text text-brand font-semibold uppercase leading-[20px] mt-[14px]">{p.title}</h3>
         </Link>
       ))}
     </div>

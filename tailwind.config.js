@@ -9,6 +9,8 @@ export default {
   theme: {
     extend: {
       "colors": {
+        // TEN Arquitectos logo purple
+        "brand": "#4a5eb1",
         "primary-container": "#1c1b1b",
         "background": "#f9f9f9",
         "on-secondary-fixed": "#1b1c1c",
