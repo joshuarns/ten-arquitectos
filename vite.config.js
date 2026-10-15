@@ -13,6 +13,8 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
+    // Host whose media URLs are rewritten to the /wp-content proxy (src/lib/wp.js).
+    define: { __WP_HOST__: JSON.stringify(new URL(target).hostname) },
     server: { proxy },
     preview: { proxy },
   }

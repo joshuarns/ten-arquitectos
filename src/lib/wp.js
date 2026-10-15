@@ -1,9 +1,10 @@
 import { parseProject } from './project'
+import { parseNews } from './news'
 
 const API = (import.meta.env.VITE_WP_API_URL || '/wp-json').replace(/\/$/, '')
 const USE_PROXY = !import.meta.env.VITE_WP_API_URL
-const NEWS_CATEGORY = import.meta.env.VITE_WP_NEWS_CATEGORY ?? 'noticias'
-const PROJECTS_CATEGORY = import.meta.env.VITE_WP_PROJECTS_CATEGORY || ''
+const NEWS_CATEGORY = import.meta.env.VITE_WP_NEWS_CATEGORY || 'news'
+const PROJECTS_CATEGORY = import.meta.env.VITE_WP_PROJECTS_CATEGORY || 'projects'
 
 const categoryIds = new Map()
 
@@ -16,14 +17,18 @@ async function request(path) {
   }
 }
 
-// With the dev proxy, media is served through /wp-content too, so absolute
-// CMS URLs become relative (the CMS SSL certificate is not valid yet).
+// With the proxy, the CMS's own media is served through /wp-content too, so its
+// absolute URLs become relative (the CMS has no valid SSL certificate). Media
+// hosted elsewhere (e.g. images embedded from another site) is left alone.
+/* global __WP_HOST__ */
+const WP_MEDIA = new RegExp(`https?://${__WP_HOST__.replace(/[.]/g, '\\.')}(?=/wp-content/)`, 'g')
+
 export function mediaUrl(url) {
-  return USE_PROXY && url ? url.replace(/^https?:\/\/[^/]+(?=\/wp-content\/)/, '') : url
+  return USE_PROXY && url ? url.replace(WP_MEDIA, '') : url
 }
 
 function rewriteMedia(html) {
-  return USE_PROXY ? html.replace(/https?:\/\/[^/"'\s]+(?=\/wp-content\/)/g, '') : html
+  return USE_PROXY ? html.replace(WP_MEDIA, '') : html
 }
 
 export function decode(html = '') {
@@ -55,6 +60,22 @@ function normalize(post) {
   }
 }
 
+function normalizeNews(post) {
+  const base = normalize(post)
+  const news = parseNews(base.content)
+  return {
+    ...base,
+    // The article's own date ("octubre 7, 2026") wins over the publish date.
+    date: news.dateText ? news.dateText.toUpperCase() : base.date,
+    excerpt: news.excerpt || base.excerpt,
+    content: news.body,
+    lede: news.lede,
+    credits: news.credits,
+    // No featured image → use the first image in the article for cards.
+    image: base.image || news.firstImage,
+  }
+}
+
 function normalizeProject(post) {
   const base = normalize(post)
   return {
@@ -83,7 +104,7 @@ function categoryId(slug) {
   return categoryIds.get(slug)
 }
 
-// News = posts in the VITE_WP_NEWS_CATEGORY category ("noticias" by default).
+// News = posts in the VITE_WP_NEWS_CATEGORY category ("news" by default).
 // No such category yet → no posts, so the design's placeholders are shown.
 export async function getPosts({ perPage = 3, page = 1 } = {}) {
   const category = await categoryId(NEWS_CATEGORY)
@@ -91,15 +112,16 @@ export async function getPosts({ perPage = 3, page = 1 } = {}) {
   const params = new URLSearchParams({ _embed: 'wp:featuredmedia', per_page: perPage, page })
   if (category) params.set('categories', category)
   const { data, totalPages } = await request(`/wp/v2/posts?${params}`)
-  return { posts: data.map(normalize), totalPages }
+  return { posts: data.map(normalizeNews), totalPages }
 }
 
 export async function getPostBySlug(slug) {
   const { data } = await request(`/wp/v2/posts?_embed=wp:featuredmedia&slug=${encodeURIComponent(slug)}`)
-  return data[0] ? normalize(data[0]) : null
+  return data[0] ? normalizeNews(data[0]) : null
 }
 
-// Projects = posts in VITE_WP_PROJECTS_CATEGORY, or every post that is not News.
+// Projects = posts in VITE_WP_PROJECTS_CATEGORY ("projects" by default); if that
+// category does not exist, every post that is not News.
 let projectsPromise
 
 export function getProjects() {

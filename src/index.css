@@ -38,3 +38,31 @@ header.scrolled {
   .jsa-prose > * { margin-bottom: 16px; }
   .jsa-prose a { text-decoration: underline; }
 }
+
+/* News article body (WordPress content). Fonts inherit Arial from the page. */
+.news-body { font-size: 18px; line-height: 32px; color: #5e5e5e; }
+.news-body > * + * { margin-top: 1.5rem; }
+.news-body p strong { color: #000; }
+.news-body h2, .news-body h3 { font-size: 32px; line-height: 40px; color: #000; margin-top: 4rem; }
+.news-body h4, .news-body h5 { font-size: 20px; line-height: 30px; color: #000; font-weight: 700; margin-top: 3.5rem; }
+.news-body h4 strong, .news-body h5 strong { font-weight: inherit; }
+.news-body a { color: #000; text-decoration: underline; }
+.news-body ul { list-style: disc; padding-left: 1.5rem; }
+.news-body ol { list-style: decimal; padding-left: 1.5rem; }
+.news-body blockquote { border-left: 2px solid #4a5eb1; padding-left: 1.5rem; font-size: 24px; line-height: 34px; color: #000; }
+/* Figures break out of the text column, but tall images stay within the screen. */
+.news-body figure {
+  margin-top: 4rem; margin-bottom: 4rem;
+  width: min(calc(100vw - 40px), 1100px);
+  position: relative; left: 50%; transform: translateX(-50%);
+}
+@media (min-width: 768px) { .news-body figure { width: min(calc(100vw - 128px), 1100px); } }
+.news-body figure img {
+  display: block; margin: 0 auto;
+  width: auto !important; height: auto !important;
+  max-width: 100%; max-height: 85vh;
+}
+.news-body figcaption {
+  font-size: 12px; line-height: 16px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #999999; margin-top: 1rem; text-align: center;
+}
