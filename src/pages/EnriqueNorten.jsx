@@ -46,7 +46,7 @@ export default function EnriqueNorten() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="flex flex-col">
             <div className="relative w-full bg-surface-container overflow-hidden">
-              <img alt="Portrait of Enrique Norten" className="w-full h-auto aspect-[3/4] object-cover grayscale contrast-105 hover:grayscale-0 transition-all duration-700 ease-out" src="/images/enrique-norten.jpg" />
+              <img alt="Portrait of Enrique Norten" className="w-full h-auto aspect-[3/4] object-cover grayscale contrast-105 hover:grayscale-0 transition-all duration-700 ease-out" src="/images/enrique-norten-lounge.jpg" />
               <div className="p-3 bg-surface-container-lowest/90 backdrop-blur-sm flex justify-between items-center">
                 <span className="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Mexico City / New York</span>
                 <span className="font-label-sm text-label-sm text-muted-silver">Ph. Sarah Gore-Reeves</span>

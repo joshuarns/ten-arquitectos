@@ -17,7 +17,7 @@ const team = [
     label: '01 / FUNDADOR',
     name: 'Enrique Norten',
     role: 'Founder & Principal Architect (Hon. FAIA)',
-    image: '/images/enrique-norten.jpg',
+    image: '/images/enrique-norten-lounge.jpg',
     alt: 'Enrique Norten - Founder & Principal Architect at TEN Arquitectos',
     text: 'Fundador de TEN Arquitectos en 1986. Reconocido internacionalmente por posicionar la arquitectura contemporánea mexicana en el diálogo global y catedrático distinguido en UPenn, Harvard y Cornell.',
     to: '/enrique-norten',
