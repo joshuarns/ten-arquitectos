@@ -6,14 +6,23 @@ const USE_PROXY = !import.meta.env.VITE_WP_API_URL
 const NEWS_CATEGORY = import.meta.env.VITE_WP_NEWS_CATEGORY || 'news'
 const PROJECTS_CATEGORY = import.meta.env.VITE_WP_PROJECTS_CATEGORY || 'projects'
 
-const categoryIds = new Map()
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function request(path) {
-  const res = await fetch(`${API}${path}`)
-  if (!res.ok) throw new Error(`WordPress ${res.status}: ${path}`)
-  return {
-    data: await res.json(),
-    totalPages: Number(res.headers.get('X-WP-TotalPages') || 1),
+// SiteGround's anti-bot sometimes answers a request with an HTML challenge
+// page (202, /.well-known/sgcaptcha) instead of JSON. Retry those a few times.
+async function request(path, attempts = 4) {
+  for (let attempt = 1; ; attempt++) {
+    const res = await fetch(`${API}${path}`)
+    const isJson = (res.headers.get('content-type') || '').includes('application/json')
+    if (res.ok && isJson) {
+      return {
+        data: await res.json(),
+        totalPages: Number(res.headers.get('X-WP-TotalPages') || 1),
+      }
+    }
+    const challenged = res.status === 202 || (res.ok && !isJson)
+    if (!challenged || attempt >= attempts) throw new Error(`WordPress ${res.status}: ${path}`)
+    await sleep(400 * attempt)
   }
 }
 
@@ -86,22 +95,23 @@ function normalizeProject(post) {
   }
 }
 
-function categoryId(slug) {
-  if (!slug) return Promise.resolve(null)
-  if (!categoryIds.has(slug)) {
-    categoryIds.set(
-      slug,
-      request(`/wp/v2/categories?slug=${encodeURIComponent(slug)}`)
-        .then(({ data }) => data[0]?.id ?? null)
-        // A failed lookup must not take down projects/news: treat as "no category".
-        .catch((error) => {
-          console.error(error)
-          categoryIds.delete(slug)
-          return null
-        }),
-    )
-  }
-  return categoryIds.get(slug)
+// Both category ids in a single request, cached for the session.
+let categoriesPromise
+
+function categoryIds() {
+  categoriesPromise ??= request(`/wp/v2/categories?slug=${encodeURIComponent([NEWS_CATEGORY, PROJECTS_CATEGORY].join(','))}`)
+    .then(({ data }) => Object.fromEntries(data.map((c) => [c.slug, c.id])))
+    // A failed lookup must not take down projects/news: treat as "no category".
+    .catch((error) => {
+      console.error(error)
+      categoriesPromise = null
+      return {}
+    })
+  return categoriesPromise
+}
+
+async function categoryId(slug) {
+  return (await categoryIds())[slug] ?? null
 }
 
 // News = posts in the VITE_WP_NEWS_CATEGORY category ("news" by default).
