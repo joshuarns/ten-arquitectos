@@ -7,11 +7,16 @@ export default function Statement() {
         <div className="md:col-span-8 md:col-start-3">
           <span className="font-label-sm text-label-sm text-secondary block mb-8 uppercase tracking-widest">Enrique Norten</span>
           <h2 className="font-headline-lg text-headline-lg-mobile text-on-surface mb-12">
-            "Architecture is not just building; it is a cultural act that articulates space and time."
+            TEN Arquitectos cuenta con 40 años de práctica profesional y en ese tiempo hemos construido algo que muy pocos despachos latinoamericanos han logrado: una presencia internacional real. Fuimos el primero en abrir una oficina formal en Estados Unidos, y seguimos siendo el despacho latinoamericano con más obra construida en ese mercado.
           </h2>
-          <p className="font-body-lg text-body-lg text-secondary max-w-2xl">
-            Founded in 1986, TEN Arquitectos operates between Mexico City, New York, and Miami. We engage in a diverse range of projects—from single-family houses to large-scale infrastructure and urban master plans.
-          </p>
+          <div className="flex flex-col gap-6 max-w-2xl">
+            <p className="font-body-lg text-body-lg text-secondary">
+              Nuestro interés principal y lo que ha guiado al despacho desde el principio, es el compromiso con la buena arquitectura y el diseño de calidad. Trabajamos en todas las escalas y tipologías —desde residencial, comercial y hotelero hasta infraestructura y planes maestros— y cada proyecto se trata individualmente, como una oportunidad de explorar y proponer algo que realmente responda al lugar y al cliente.
+            </p>
+            <p className="font-body-lg text-body-lg text-secondary">
+              Lo que nos distingue es que tenemos la experiencia y la capacidad de los despachos grandes, pero la relación con el cliente es directa y personal. Yo dirijo y superviso cada proyecto, respaldado por un equipo directivo con más de dos décadas en el despacho.
+            </p>
+          </div>
         </div>
       </Reveal>
     </section>
