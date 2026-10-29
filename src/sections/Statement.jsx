@@ -6,7 +6,7 @@ export default function Statement() {
   return (
     <section className="bg-white text-black px-margin-mobile py-[64px] md:py-[120px]">
       <Reveal className="max-w-max-width mx-auto">
-        <div className="font-body-md text-[18px] leading-[30px] md:text-[22px] md:leading-[36px] flex flex-col gap-[24px] md:gap-[32px]">
+        <div className="font-body-md text-[17px] leading-[28px] flex flex-col gap-[24px] md:gap-[32px]">
           <p className="text-brand">
             TEN Arquitectos cuenta con 40 años de práctica profesional y en ese tiempo hemos construido algo que muy pocos despachos latinoamericanos han logrado: una presencia internacional real. Fuimos el primero en abrir una oficina formal en Estados Unidos, y seguimos siendo el despacho latinoamericano con más obra construida en ese mercado.
           </p>
