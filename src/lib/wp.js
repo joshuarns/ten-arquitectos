@@ -5,6 +5,7 @@ const API = (import.meta.env.VITE_WP_API_URL || '/wp-json').replace(/\/$/, '')
 const USE_PROXY = !import.meta.env.VITE_WP_API_URL
 const NEWS_CATEGORY = import.meta.env.VITE_WP_NEWS_CATEGORY || 'news'
 const PROJECTS_CATEGORY = import.meta.env.VITE_WP_PROJECTS_CATEGORY || 'projects'
+const WIP_CATEGORY = import.meta.env.VITE_WP_WIP_CATEGORY || 'work-in-progress'
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -95,11 +96,11 @@ function normalizeProject(post) {
   }
 }
 
-// Both category ids in a single request, cached for the session.
+// All category ids in a single request, cached for the session.
 let categoriesPromise
 
 function categoryIds() {
-  categoriesPromise ??= request(`/wp/v2/categories?slug=${encodeURIComponent([NEWS_CATEGORY, PROJECTS_CATEGORY].join(','))}`)
+  categoriesPromise ??= request(`/wp/v2/categories?slug=${encodeURIComponent([NEWS_CATEGORY, PROJECTS_CATEGORY, WIP_CATEGORY].join(','))}`)
     .then(({ data }) => Object.fromEntries(data.map((c) => [c.slug, c.id])))
     // A failed lookup must not take down projects/news: treat as "no category".
     .catch((error) => {
@@ -131,15 +132,15 @@ export async function getPostBySlug(slug) {
 }
 
 // Projects = posts in VITE_WP_PROJECTS_CATEGORY ("projects" by default); if that
-// category does not exist, every post that is not News.
+// category does not exist, every post that is not News or Work in Progress.
 let projectsPromise
 
 export function getProjects() {
   projectsPromise ??= (async () => {
-    const [projectsCat, newsCat] = await Promise.all([categoryId(PROJECTS_CATEGORY), categoryId(NEWS_CATEGORY)])
+    const [projectsCat, newsCat, wipCat] = await Promise.all([categoryId(PROJECTS_CATEGORY), categoryId(NEWS_CATEGORY), categoryId(WIP_CATEGORY)])
     const params = new URLSearchParams({ _embed: 'wp:featuredmedia', per_page: 100 })
     if (projectsCat) params.set('categories', projectsCat)
-    else if (newsCat) params.set('categories_exclude', newsCat)
+    else if (newsCat || wipCat) params.set('categories_exclude', [newsCat, wipCat].filter(Boolean).join(','))
     const { data } = await request(`/wp/v2/posts?${params}`)
     return data.map(normalizeProject)
   })().catch((error) => {
@@ -147,4 +148,26 @@ export function getProjects() {
     throw error
   })
   return projectsPromise
+}
+
+// Work in progress = posts in VITE_WP_WIP_CATEGORY ("work-in-progress" by
+// default). No such category → no posts, and the home carousel stays hidden.
+let workInProgressPromise
+
+export function getWorkInProgress() {
+  workInProgressPromise ??= (async () => {
+    const category = await categoryId(WIP_CATEGORY)
+    if (!category) return []
+    const params = new URLSearchParams({ _embed: 'wp:featuredmedia', per_page: 100, categories: category })
+    const { data } = await request(`/wp/v2/posts?${params}`)
+    return data.map((post) => {
+      const base = normalize(post)
+      // No featured image → use the first image in the post.
+      return { ...base, image: base.image || parseNews(base.content).firstImage }
+    })
+  })().catch((error) => {
+    workInProgressPromise = null
+    throw error
+  })
+  return workInProgressPromise
 }
