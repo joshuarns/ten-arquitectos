@@ -21,7 +21,7 @@ async function request(path, attempts = 4) {
         totalPages: Number(res.headers.get('X-WP-TotalPages') || 1),
       }
     }
-    const challenged = res.status === 202 || res.status === 503 || (res.ok && !isJson)
+    const challenged = res.status === 202 || (res.ok && !isJson)
     if (!challenged || attempt >= attempts) throw new Error(`WordPress ${res.status}: ${path}`)
     await sleep(400 * attempt)
   }
