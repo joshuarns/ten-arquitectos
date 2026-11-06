@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import ProjectGrid from '../components/project/ProjectGrid'
 import ProjectList from '../components/project/ProjectList'
-import Timeline from '../sections/Timeline'
 import useProjects from '../hooks/useProjects'
 
 // The chronological list is hidden for now; the timeline takes its place.
@@ -27,8 +26,6 @@ export default function ProjectsIndex() {
           <ProjectList projects={projects} />
         </section>
       )}
-
-      <Timeline />
     </div>
   )
 }

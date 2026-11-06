@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon'
 import Reveal from '../components/Reveal'
+import Timeline from '../sections/Timeline'
 
 // Markup ported from the Stitch export "stitch_ten_arquitectos_website_redesign (3)/code.html".
 
@@ -100,6 +101,8 @@ export default function Studio() {
           </div>
         </Reveal>
       </section>
+
+      <Timeline />
 
       {/* Disciplines & Approach */}
       <section className="w-full px-margin-mobile md:px-margin-desktop py-12 bg-deep-obsidian text-on-primary">
