@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './index.css'
+import { retryCmsImages } from './lib/retryImages'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import NewsIndex from './pages/NewsIndex'
@@ -10,6 +11,8 @@ import ProjectsIndex from './pages/ProjectsIndex'
 import ProjectPage from './pages/ProjectPage'
 import EnriqueNorten from './pages/EnriqueNorten'
 import Studio from './pages/Studio'
+
+retryCmsImages()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -11,7 +11,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 // SiteGround's anti-bot sometimes answers a request with an HTML challenge
 // page (202, /.well-known/sgcaptcha) instead of JSON. Retry those a few times.
-async function request(path, attempts = 4) {
+async function request(path, attempts = 12) {
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(`${API}${path}`)
     const isJson = (res.headers.get('content-type') || '').includes('application/json')
@@ -23,7 +23,7 @@ async function request(path, attempts = 4) {
     }
     const challenged = res.status === 202 || (res.ok && !isJson)
     if (!challenged || attempt >= attempts) throw new Error(`WordPress ${res.status}: ${path}`)
-    await sleep(400 * attempt)
+    await sleep(Math.min(400 * attempt, 1500))
   }
 }
 
