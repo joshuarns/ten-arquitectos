@@ -55,10 +55,19 @@ function Segment({ start, open, isLast }) {
   )
 }
 
-export default function Timeline() {
-  const [open, setOpen] = useState(() => new Set([0]))
-  const id = useId()
+function Chevron({ open }) {
+  return (
+    <span className="w-[14px] h-[14px] flex items-center justify-center" aria-hidden="true">
+      <span
+        className={`block w-[8px] h-[8px] border-r border-b border-black transition-transform duration-300 ${open ? 'rotate-[225deg] translate-y-[2px]' : 'rotate-45 -translate-y-[2px]'}`}
+      ></span>
+    </span>
+  )
+}
 
+// Rows that open and close independently; `initial` lists the ones open at first.
+function useToggleSet(initial = []) {
+  const [open, setOpen] = useState(() => new Set(initial))
   const toggle = (i) =>
     setOpen((prev) => {
       const next = new Set(prev)
@@ -66,6 +75,46 @@ export default function Timeline() {
       else next.add(i)
       return next
     })
+  return [open, toggle]
+}
+
+// Accordion inside an open decade, with lighter hairlines than the page's.
+function Details({ items }) {
+  const [open, toggle] = useToggleSet()
+  const id = useId()
+
+  return (
+    <ul className="mt-[24px] border-t border-black/10">
+      {items.map((item, i) => {
+        const isOpen = open.has(i)
+        return (
+          <li key={item.title} className="border-b border-black/10">
+            <h5>
+              <button
+                className="w-full h-[40px] flex items-center justify-between text-left font-semibold"
+                aria-expanded={isOpen}
+                aria-controls={`${id}-${i}`}
+                onClick={() => toggle(i)}
+              >
+                <span className="pr-[14px]">{item.title}</span>
+                <Chevron open={isOpen} />
+              </button>
+            </h5>
+            {isOpen && (
+              <div id={`${id}-${i}`} role="region" className="pb-[16px]">
+                <p>{item.text}</p>
+              </div>
+            )}
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+export default function Timeline() {
+  const [open, toggle] = useToggleSet([0])
+  const id = useId()
 
   return (
     <section className="bg-white text-black px-[6vw] md:px-[5vw] py-[64px] md:py-[120px] md:min-h-screen flex flex-col justify-center">
@@ -89,11 +138,7 @@ export default function Timeline() {
                     onClick={() => toggle(i)}
                   >
                     <span className="pr-[14px]">{decade.title}</span>
-                    <span className="w-[14px] h-[14px] flex items-center justify-center" aria-hidden="true">
-                      <span
-                        className={`block w-[8px] h-[8px] border-r border-b border-black transition-transform duration-300 ${isOpen ? 'rotate-[225deg] translate-y-[2px]' : 'rotate-45 -translate-y-[2px]'}`}
-                      ></span>
-                    </span>
+                    <Chevron open={isOpen} />
                   </button>
                 </h4>
                 {isOpen && (
@@ -101,6 +146,7 @@ export default function Timeline() {
                     <p className="mb-[16px]">{decade.en}</p>
                     <p className="mb-[16px] italic" style={{ color: BLUE }}>{decade.es}</p>
                     <p className="italic">{decade.works.join(' · ')}</p>
+                    {decade.details?.length > 0 && <Details items={decade.details} />}
                   </div>
                 )}
               </article>
